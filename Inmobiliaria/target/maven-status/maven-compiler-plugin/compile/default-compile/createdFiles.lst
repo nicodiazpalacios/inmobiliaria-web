@@ -1,7 +1,6 @@
-com\mycompany\parcialdomiciliario\JakartaRestConfiguration.class
-com\mycompany\parcialdomiciliario\entidades\GestorBD.class
-com\mycompany\parcialdomiciliario\repositorios\RepositorioNotas.class
-com\mycompany\parcialdomiciliario\controladores\ControladorNotas.class
-com\mycompany\parcialdomiciliario\validadores\validadorHoraMaxima.class
-com\mycompany\parcialdomiciliario\entidades\Notas.class
-com\mycompany\parcialdomiciliario\resources\JakartaEE10Resource.class
+com\mycompany\inmobiliariaapp\entidades\Notas.class
+com\mycompany\inmobiliariaapp\JakartaRestConfiguration.class
+com\mycompany\inmobiliariaapp\resources\JakartaEE10Resource.class
+com\mycompany\inmobiliariaapp\controladores\ControladorNotas.class
+com\mycompany\inmboliariaapp\repositorios\RepositorioNotas.class
+com\mycompany\inmobiliariaapp\entidades\GestorBD.class
