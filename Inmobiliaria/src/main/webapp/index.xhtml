@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./templates/layout.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:h="jakarta.faces.html">
+
+
+    <ui:define name="top">
+        <h:outputStylesheet library="css" name="notas.css" />
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="formAgregar">
+
+            <!-- Campo Titulo -->
+            <div class="campo-linea">
+                <h:outputLabel for="titulo" value="Título:" class="label-campo" />
+                <h:inputText id="titulo" value="#{controladorNotas.nuevaNota.titulo}"
+                             maxlength="40" required="true"
+                             requiredMessage="Error: El título es obligatorio."
+                             class="input-titulo">
+                    <f:passThroughAttribute name="placeholder" value="Ingrese el título aquí" />
+                </h:inputText>
+                <h:message for="titulo" class="mensaje-error" />
+            </div>
+
+            <!-- Campo Contenido -->
+            <div class="campo-linea-vertical">
+                <h:outputLabel for="contenido" value="Contenido:" class="label-campo label-vertical" />
+                <div class="contenido-container">
+                    <div class="contenido-textarea-container">
+                        <h:inputTextarea id="contenido" value="#{controladorNotas.nuevaNota.contenido}" 
+                                         rows="8" required="true"
+                                         validatorMessage="El contenido no puede superar 255 caracteres."
+                                         requiredMessage="Error: El contenido es obligatorio."
+                                         class="input-contenido">
+                            <f:passThroughAttribute name="placeholder" value="Ingrese el contenido aquí" />
+                            <f:validateLength maximum="255" />
+                            <f:passThroughAttribute name="maxlength" value="255" />
+                        </h:inputTextarea>
+                        <div id="contador" class="contador">0 / 255</div>
+                    </div>
+                    <div class="mensaje-container">
+                        <h:message for="contenido" class="mensaje-error" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo Color -->
+            <div class="campo-linea">
+                <h:outputLabel for="color" value="Color de fondo:" class="label-campo" />
+                <h:inputText id="color" value="#{controladorNotas.nuevaNota.color}"
+                             class="input-color">
+                    <f:passThroughAttribute name="type" value="color" />
+                </h:inputText>
+            </div>
+
+            <!-- Campo Fecha -->
+            <div class="campo-linea">
+                <h:outputLabel for="fecha" value="Fecha y hora:" />
+                <h:inputText id="fecha" value="#{controladorNotas.nuevaNota.fecha}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT-3" />
+                    <f:validator validatorId="validadorHoraMaxima" />
+                </h:inputText>
+                <h:message for="fecha" />
+            </div>
+
+
+            <!-- Campo Categoria -->
+            <div class="campo-linea">
+                <h:outputLabel for="categoria" value="Categoría:" />
+                <h:selectOneMenu id="categoria" value="#{controladorNotas.nuevaNota.categoria}">
+                    <f:selectItem itemLabel="Seleccionar..." itemValue="" />
+                    <f:selectItem itemLabel="Recordatorio" itemValue="Recordatorio" />
+                    <f:selectItem itemLabel="Personal" itemValue="Personal" />
+                    <f:selectItem itemLabel="Tarea" itemValue="Tarea" />
+                    <f:selectItem itemLabel="Evento" itemValue="Evento" />
+                </h:selectOneMenu>
+            </div>
+
+            <!-- Boton Agregar -->
+            <h:commandButton value="Agregar Nota" action="#{controladorNotas.agregarNota}" class="boton-agregar" />
+
+        </h:form>
+
+        <hr/>
+
+        <!-- Visor de Notas -->
+
+        <h2>Notas agregadas:</h2>
+
+        <div class="notas-container">
+            <ui:repeat value="#{controladorNotas.notas}" var="nota">
+                <div class="nota" style="background-color: #{empty nota.color ? '#ff0000' : nota.color};">
+                    <h3 class="titulo-nota">
+                        #{nota.titulo}
+                    </h3>
+
+                    <p class="contenido-nota">
+                        #{fn:length(nota.contenido) > 255 ? fn:substring(nota.contenido, 0, 255) : nota.contenido}
+                    </p>
+
+                    <div class="nota-footer">
+                        <div class="nota-acciones">
+                            <h:form>
+                                <h:commandButton id="btninferior" value="Editar" actionListener="#{controladorNotas.cargarNotaParaEditar}"
+                                                 class="boton-accion" >
+                                    <f:setPropertyActionListener target="#{controladorNotas.nuevaNota}" value="#{nota}" />
+                                </h:commandButton>
+                            </h:form>
+
+                            <h:form>
+                                <h:commandButton id="btninferior" value="Eliminar" action="#{controladorNotas.eliminarNota(nota)}"
+                                                 onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?');"
+                                                 class="boton-accion" />
+                            </h:form>
+                        </div>
+
+                        <p class="fecha-nota">
+                            #{nota.fecha}
+                        </p>
+
+                        <p class="clase-nota">
+                            #{nota.categoria}
+                        </p>
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+
+    </ui:define>
+
+    <ui:define name="bottom">
+    </ui:define>
+
+</ui:composition>
