@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f3f4] px-10 py-3">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4 text-[#111618]">
+              <div class="size-4">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <h2 class="text-[#111618] text-lg font-bold leading-tight tracking-[-0.015em]">HomeFinder</h2>
+            </div>
+            <div class="flex items-center gap-9">
+              <a class="text-[#111618] text-sm font-medium leading-normal" href="#">Comprar</a>
+              <a class="text-[#111618] text-sm font-medium leading-normal" href="#">Alquilar</a>
+              <a class="text-[#111618] text-sm font-medium leading-normal" href="#">Vender</a>
+              <a class="text-[#111618] text-sm font-medium leading-normal" href="#">Hipotecas</a>
+              <a class="text-[#111618] text-sm font-medium leading-normal" href="#">Buscar Agente</a>
+            </div>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <label class="flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#617c89] flex border-none bg-[#f0f3f4] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-full placeholder:text-[#617c89] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f3f4] text-[#111618] text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Iniciar sesión</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
+                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQfD2gvwCkNpcPbm_0WnvCWmTDmR6oUpRAvGQiNGsxPw1ZMAL9eZGAFnRPQYYQ0Agbnna892Qgb10phCuq7lIQxFypqw8A3JYAuSGlM_BWL1jWK9fYfkldeP-sRKBtzSf0Ub0P6x78kUFZVc1E7ZyNrYQNr8pLLeSmDU1vB-WoWDFmodtk4c3iZBxeS8WHflcLVL0SU_D4q5kC8isnPMBD3tIbDhJ3clIcEcVvVk83KhzEmw1bg6ciJUMCGhalwSEOtJB3tPVSPXM");'
+                >
+                  <div class="flex flex-col gap-2 text-center">
+                    <h1
+                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+                    >
+                      Encuentra tu lugar con nuestros expertos locales
+                    </h1>
+                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                      Busca millones de apartamentos, casas y condominios en venta y alquiler en todo el país.
+                    </h2>
+                  </div>
+                  <label class="flex flex-col min-w-40 h-14 w-full max-w-[480px] @[480px]:h-16">
+                    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                      <div
+                        class="text-[#617c89] flex border border-[#dbe2e6] bg-white items-center justify-center pl-[15px] rounded-l-lg border-r-0"
+                        data-icon="MagnifyingGlass"
+                        data-size="20px"
+                        data-weight="regular"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                          <path
+                            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                          ></path>
+                        </svg>
+                      </div>
+                      <input
+                        placeholder="Ingresa una dirección, vecindario, ciudad o código postal"
+                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border border-[#dbe2e6] bg-white focus:border-[#dbe2e6] h-full placeholder:text-[#617c89] px-[15px] rounded-r-none border-r-0 pr-2 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
+                        value=""
+                      />
+                      <div class="flex items-center justify-center rounded-r-lg border-l-0 border border-[#dbe2e6] bg-white pr-[7px]">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#1193d4] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                        >
+                          <span class="truncate">Buscar</span>
+                        </button>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Propiedades Destacadas</h2>
+            <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+              <div class="flex items-stretch p-4 gap-3">
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDr1tOdDWXwRTQRcEPMBe044KHAAUA7S0AIf2nufY-gzqnKjVCUyQOd3LKJgVXmoiZ7wnTspMHe3tZdSxbs7fVHBy719rNV6DNeIn-dNWiqBoGZnIp600D0ydGaZbYWb9T0zQOuIXj-2PJYKHaaDg1Tbo-bggyvZiATrky5QH_i_Ornlyu-s3MwHHPmLB9EAeLnSwgHQgfEnfwv5ziCb7ReBzyeIPL0s4akL3D36_Vr2tSdFlEcVPr7IVCrwsFgD0MUP8goFN9OLk");'
+                  ></div>
+                  <div>
+                    <p class="text-[#111618] text-base font-medium leading-normal">Impresionante Casa Moderna</p>
+                    <p class="text-[#617c89] text-sm font-normal leading-normal">3 camas · 2 baños · 2,000 pies cuadrados</p>
+                  </div>
+                </div>
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBotSKhzLRvszjHSLwFGTtQKXltunbYiH3AZNl32XIkyWuLNm64QHaGt38anac9V5lsVCJ3GXo5s8bpjWLD1BdLyUALpyz0ZSkGf8giGfe29BQlaZv_rjcSlNsgZ0WuoT7ucUu3jHRJ7dWNJirrpe_IT2wqudP72IuCQ23TLV3ER1HOX4dZL8qGGA2YGhfA3HfHpblSsy8gCBG4k9AMJAyHnPcJyG93ZDQthMp78U12SD8BMycm8BT1kBDlv9OJ8ZJ80cBe6iiUq1k");'
+                  ></div>
+                  <div>
+                    <p class="text-[#111618] text-base font-medium leading-normal">Encantador Apartamento en la Ciudad</p>
+                    <p class="text-[#617c89] text-sm font-normal leading-normal">1 cama · 1 baño · 800 pies cuadrados</p>
+                  </div>
+                </div>
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjt9CJQBpWH8CsVEiDDulCpp95fSuL5U21DrReV2etPfar_0TYzlkdNIjMEIAhhCQEjaUzhmd4y28dzVVTAc-LOvXgZ81hTHr4i8WOUEK6VCBORU6nXvum_daNw_NDCu3053lFB0xuYa07C8-WOi-NKaEJkrPJ31E3Xb5AXJvVyOCBB6wRs4eHMrTdN8LagExbm_c3iAkeudFN6tQcQnwJ63Is1w7oFJDluEENgQCqxJw-pT9Pc0WYuzl_cFUZmFVkF_L10Q866HM");'
+                  ></div>
+                  <div>
+                    <p class="text-[#111618] text-base font-medium leading-normal">Condominio de Lujo Frente al Mar</p>
+                    <p class="text-[#617c89] text-sm font-normal leading-normal">2 camas · 2 baños · 1,500 pies cuadrados</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Explorar por Tipo de Propiedad</h2>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFH736RDdhjl8z28w7HkaOwsrdwcRNnCAedHgQ14cQipaO5GP_7ES7SIh98BSLxs5DWpSS_6wll4Ma41qZr0IMW8dgF7MqLU9mao_MfDFSC5SE24a2VDPdkMX0wvEZoYddjkGaNyIwbgcrx3M0g75FQCJs5F0aDHV0V4Fz9SNY7KqCedqfCyP65HxXhndyd3ChUDQur3FadqHeZUvS9If5DsFdEFd6wvmgyZxGjly1mw5kmUhSk2xWGDrNLJlg59F_QuoVz1zrvNs");'
+                ></div>
+                <p class="text-[#111618] text-base font-medium leading-normal">Casas</p>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJoRAnoDjBp8C_nXymr2g7dc6NIJI7FGrBlbmUHnOFDqeavBnjqBHsYiHugjcCACB-mh-22afAgyqYAOfsp8DGVg3dzaYIfU_QvWGQ3aNBYy7uZGh2VuTmPV9ClqPlCuvG74t69DUsuUiCJuuA1bItNwVxKgaISwp5_ouab0LVwLPHKR-U7pc8tcuV6nxM304AjjOfSjoOSujacKTcO16EAcz9kcNglG3Hs6HqaM_2gh-kXepiZLXsj_OpmXbB0-knL7lXwVGiC88");'
+                ></div>
+                <p class="text-[#111618] text-base font-medium leading-normal">Apartamentos</p>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABLVLZdmWNBYvmUY2uKT6njFJd8wU6Ul8f8BSWI3RmUuAhRLqcImZ77sYDIFL8Wxo5H6bvlY7UEUAKe5sNTQW7QafsjuOPt-zDn7DcP9sxH3Yy9lz1h85nTfJ7-GKlvy_rHlkFiLtzf3a9HbhcrgH3NfY35qsm2Hk6xcxg6tDwCIMKAHV3PsGUYV28w-8f_Jo01lMvZnRt6R84Bs4YOZD1svUMUnTyy9Hh3dVon3JfCyiTKdkQy5HNuzeASWnMa3qCQEwhC3y4sq8");'
+                ></div>
+                <p class="text-[#111618] text-base font-medium leading-normal">Condominios</p>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6h9QD7AZOqQfiAdQW7KwJ2HtuqE9y5R2ORlS1BGn9aCE7CRXh0xQpeKKfDahBxhTsUf6JCTsuI1jfjE25LE5e3TkM7e7k16A05C-vMYRlMjvLenlCZ_C053eMnUOMuMqTHnbD46ldCeD0xbv4W_CZOIPP4vi4g5n7J169ITcK-qx9_cmN2u31MU00t5s_i9Ote136oZ5Cdt74S-I9oVNfzKq0Nxw2AdCClXYJG2HWfjQA87ssEniDtHc-xiXasD9PxEY7Z7o2AWY");'
+                ></div>
+                <p class="text-[#111618] text-base font-medium leading-normal">Casas adosadas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
