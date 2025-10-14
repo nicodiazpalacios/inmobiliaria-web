@@ -1,84 +1,67 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>HomeFinder</title>
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white">
-
-<header class="border-b border-gray-200 px-6 py-3">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center gap-4">
-            <div class="w-10 h-10 text-gray-900">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
-                          fill="currentColor"></path>
-                </svg>
-            </div>
-            <h2 class="text-lg font-bold text-gray-900">HomeFinder</h2>
-        </div>
-
-        <!-- Navigation Links Desktop -->
-        <nav class="hidden md:flex items-center gap-6">
-            <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.buy}">Comprar</a>
-            <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.rent}">Alquilar</a>
-            <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.sell}">Vender</a>
-            <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.mortgage}">Hipotecas</a>
-            <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.agent}">Buscar Agente</a>
-        </nav>
-
-        <!-- Right: Search + Login + Mobile Menu -->
-        <div class="flex items-center gap-4">
-            <!-- Search Box -->
-            <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-2 h-10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="currentColor"
-                     viewBox="0 0 256 256">
-                    <path
-                        d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-                </svg>
-                <input type="text" placeholder="Search" class="bg-gray-100 border-none placeholder-gray-400 text-gray-900 px-2 focus:outline-none"/>
+    <header th:fragment="header" class="border-b border-gray-200 px-6 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 text-gray-900">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-bold text-gray-900">HomeFinder</h2>
             </div>
 
-            <!-- Login Button -->
-            <button class="hidden md:block h-10 px-4 bg-gray-100 rounded-lg text-gray-900 font-bold text-sm truncate"
-                    th:text="#{menu.login}">Iniciar sesión</button>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.buy}">Comprar</a>
+                <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.rent}">Alquilar</a>
+                <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.sell}">Vender</a>
+                <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.mortgage}">Hipotecas</a>
+                <a href="#" class="text-gray-900 font-medium text-sm" th:text="#{menu.agent}">Buscar Agente</a>
+            </nav>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden flex items-center justify-center w-10 h-10 text-gray-900 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-2 h-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="currentColor"
+                        viewBox="0 0 256 256">
+                        <path
+                            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+                    </svg>
+                    <input type="text" placeholder="Search" class="bg-gray-100 border-none placeholder-gray-400 text-gray-900 px-2 focus:outline-none"/>
+                </div>
+
+                <button class="hidden md:block h-10 px-4 bg-gray-100 rounded-lg text-gray-900 font-bold text-sm truncate"
+                        th:text="#{menu.login}">Iniciar sesión</button>
+
+                <button id="mobile-menu-button" class="md:hidden flex items-center justify-center w-10 h-10 text-gray-900 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-2 px-6">
-        <nav class="flex flex-col gap-2">
-            <a href="#" class="text-gray-900 font-medium text-sm">Comprar</a>
-            <a href="#" class="text-gray-900 font-medium text-sm">Alquilar</a>
-            <a href="#" class="text-gray-900 font-medium text-sm">Vender</a>
-            <a href="#" class="text-gray-900 font-medium text-sm">Hipotecas</a>
-            <a href="#" class="text-gray-900 font-medium text-sm">Buscar Agente</a>
-            <button class="h-10 px-4 bg-gray-100 rounded-lg text-gray-900 font-bold text-sm truncate mt-2">Iniciar sesión</button>
-        </nav>
-    </div>
-</header>
+        <div id="mobile-menu" class="hidden md:hidden mt-2 px-6">
+            <nav class="flex flex-col gap-2">
+                <a href="#" class="text-gray-900 font-medium text-sm">Comprar</a>
+                <a href="#" class="text-gray-900 font-medium text-sm">Alquilar</a>
+                <a href="#" class="text-gray-900 font-medium text-sm">Vender</a>
+                <a href="#" class="text-gray-900 font-medium text-sm">Hipotecas</a>
+                <a href="#" class="text-gray-900 font-medium text-sm">Buscar Agente</a>
+                <button class="h-10 px-4 bg-gray-100 rounded-lg text-gray-900 font-bold text-sm truncate mt-2">Iniciar sesión</button>
+            </nav>
+        </div>
 
-<!-- JS para abrir/cerrar menú móvil -->
-<script>
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+        <script>
+            // Nota: Si usas este fragmento, este JS debe estar en el DOM para que funcione.
+            // Podrías moverlo a un archivo .js externo para mayor limpieza.
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-    menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-</script>
-
-</body>
-</html>
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        </script>
+    </header>
