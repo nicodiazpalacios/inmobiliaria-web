@@ -12,15 +12,26 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        // Permitir acceso público a la raíz y recursos
-                        .requestMatchers("/", "/css/**", "/js/**", "/images/**").permitAll()
+                        // Permite acceso público a la raíz, recursos, LOGIN y REGISTRO
+                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll() // <--
+                                                                                                                    // ¡Rutas
+                                                                                                                    // /login
+                                                                                                                    // y
+                                                                                                                    // /register
+                                                                                                                    // añadidas!
                         .anyRequest().authenticated())
-                // AÑADIR ESTA CONFIGURACIÓN DE LOGIN EXPLÍCITA:
+
+                // Configuración de Login
                 .formLogin((form) -> form
-                        .loginPage("/login") // Si no tienes /login, puedes dejarlo por defecto, pero especificaremos la
-                                             // página de éxito.
-                        .defaultSuccessUrl("/", true) // <--- CRÍTICO: Redirige a la raíz después del login.
-                        .permitAll());
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll())
+
+        // Opcional: Deshabilita CSRF si lo necesitas para formularios simples o APIs,
+        // pero si usas Thymeleaf, generalmente lo mantienes.
+        // .csrf(csrf -> csrf.disable());
+
+        ; // Asegúrate de terminar la cadena con un punto y coma
 
         return http.build();
     }
