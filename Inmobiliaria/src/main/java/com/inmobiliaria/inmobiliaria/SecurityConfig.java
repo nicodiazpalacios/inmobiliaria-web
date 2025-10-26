@@ -12,26 +12,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        // Permite acceso público a la raíz, recursos, LOGIN y REGISTRO
-                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll() // <--
-                                                                                                                    // ¡Rutas
-                                                                                                                    // /login
-                                                                                                                    // y
-                                                                                                                    // /register
-                                                                                                                    // añadidas!
+                        // Permite acceso público a: /, /login, /register, /contactar-agente, y
+                        // estáticos.
+                        .requestMatchers("/", "/login", "/register", "/contactar-agente", "/css/**", "/js/**",
+                                "/images/**")
+                        .permitAll()
+
+                        // Cualquier otra solicitud requiere autenticación
                         .anyRequest().authenticated())
 
-                // Configuración de Login
+                // Configuración de la autenticación de formularios
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
-                        .permitAll())
-
-        // Opcional: Deshabilita CSRF si lo necesitas para formularios simples o APIs,
-        // pero si usas Thymeleaf, generalmente lo mantienes.
-        // .csrf(csrf -> csrf.disable());
-
-        ; // Asegúrate de terminar la cadena con un punto y coma
+                        .permitAll());
 
         return http.build();
     }

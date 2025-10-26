@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Contactar Agente</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <style>
+      .form-input {
+          --tw-ring-color: transparent !important;
+          border-color: transparent !important;
+      }
+      .form-input:focus {
+          box-shadow: none !important;
+          border-color: transparent !important;
+      }
+      /* Define la variable CSS para el tick del checkbox */
+      :root {
+          --checkbox-tick-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(255,255,255)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e');
+      }
+      .checked\:bg-\[image\:--checkbox-tick-svg\]:checked {
+          background-image: var(--checkbox-tick-svg);
+      }
+    </style>
+  </head>
+  
+  <body class="bg-white">
+    <div
+      class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden"
+      style='font-family: "Work Sans", "Noto Sans", sans-serif;'
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        
+        <div class="px-40 flex flex-1 justify-center py-5">
+          
+          <form 
+            class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1"
+            th:action="@{/contactar-agente}" 
+            th:object="${contactForm}" 
+            method="post"
+          >
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3">
+                <p class="text-[#111618] tracking-light text-[32px] font-bold leading-tight">Contactar al Agente</p>
+                <p class="text-[#617c89] text-sm font-normal leading-normal">Envía un mensaje o solicita más información</p>
+              </div>
+            </div>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111618] text-base font-medium leading-normal pb-2">Tu nombre</p>
+                <input
+                  placeholder="Ingresa tu nombre"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#617c89] p-4 text-base font-normal leading-normal"
+                  type="text"
+                  th:field="*{name}"
+                />
+              </label>
+            </div>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111618] text-base font-medium leading-normal pb-2">Tu correo electrónico</p>
+                <input
+                  placeholder="Ingresa tu correo electrónico"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#617c89] p-4 text-base font-normal leading-normal"
+                  type="email"
+                  th:field="*{email}"
+                />
+              </label>
+            </div>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111618] text-base font-medium leading-normal pb-2">Tu número de teléfono</p>
+                <input
+                  placeholder="Ingresa tu número de teléfono"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#617c89] p-4 text-base font-normal leading-normal"
+                  type="tel"
+                  th:field="*{phone}"
+                />
+              </label>
+            </div>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111618] text-base font-medium leading-normal pb-2">Mensaje</p>
+                <textarea
+                  placeholder="Hola, estoy interesado en esta propiedad. Por favor, envíame más información."
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none min-h-36 placeholder:text-[#617c89] p-4 text-base font-normal leading-normal"
+                  th:field="*{message}"
+                ></textarea>
+              </label>
+            </div>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111618] text-base font-medium leading-normal pb-2">Consulta de disponibilidad</p>
+                <input
+                  placeholder="Fecha deseada"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] focus:outline-0 focus:ring-0 border-none bg-[#f0f3f4] focus:border-none h-14 placeholder:text-[#617c89] p-4 text-base font-normal leading-normal"
+                  type="date"
+                  th:field="*{desiredDate}"
+                />
+              </label>
+            </div>
+            
+            <div class="px-4">
+              <label class="flex gap-x-3 py-3 flex-row">
+                <input
+                  type="checkbox"
+                  class="h-5 w-5 rounded border-[#dbe2e6] border-2 bg-transparent text-[#1193d4] checked:bg-[#1193d4] checked:border-[#1193d4] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#dbe2e6] focus:outline-none"
+                  th:field="*{followUp}"
+                />
+                <p class="text-[#111618] text-base font-normal leading-normal">Seguimiento de solicitud</p>
+              </label>
+            </div>
+            
+            <div class="flex px-4 py-3">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 flex-1 bg-[#1193d4] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                type="submit"
+              >
+                <span class="truncate">Enviar</span>
+              </button>
+            </div>
+            
+          </form>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
