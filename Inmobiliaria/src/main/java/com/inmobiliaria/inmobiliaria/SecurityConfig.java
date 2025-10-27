@@ -8,25 +8,24 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                        // Permite acceso público a: /, /login, /register, /contactar-agente, y
-                        // estáticos.
-                        .requestMatchers("/", "/login", "/register", "/contactar-agente", "/css/**", "/js/**",
-                                "/images/**")
-                        .permitAll()
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests((requests) -> requests
+                                                // RUTAS PÚBLICAS: Añadimos /staff/login
+                                                .requestMatchers("/", "/login", "/register", "/contactar-agente",
+                                                                "/staff/login", "/css/**", "/js/**", "/images/**")
+                                                .permitAll()
 
-                        // Cualquier otra solicitud requiere autenticación
-                        .anyRequest().authenticated())
+                                                // Cualquier otra solicitud requiere autenticación
+                                                .anyRequest().authenticated())
 
-                // Configuración de la autenticación de formularios
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll());
+                                // Configuración de la autenticación de formularios
+                                .formLogin((form) -> form
+                                                .loginPage("/login")
+                                                .defaultSuccessUrl("/", true)
+                                                .permitAll());
 
-        return http.build();
-    }
+                return http.build();
+        }
 }

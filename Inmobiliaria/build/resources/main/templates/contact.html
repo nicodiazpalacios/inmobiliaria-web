@@ -34,6 +34,9 @@
   </head>
   
   <body class="bg-white">
+
+    <div th:replace="header :: header"></div> 
+
     <div
       class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden"
       style='font-family: "Work Sans", "Noto Sans", sans-serif;'
@@ -138,5 +141,8 @@
           </div>
       </div>
     </div>
+
+    <div th:replace="footer :: footer"></div> 
+
   </body>
 </html>

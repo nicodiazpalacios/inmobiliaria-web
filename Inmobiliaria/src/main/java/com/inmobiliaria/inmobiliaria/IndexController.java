@@ -1,8 +1,9 @@
 package com.inmobiliaria.inmobiliaria;
 
-import com.inmobiliaria.inmobiliaria.model.ContactForm; // <-- ¡NUEVA IMPORTACIÓN!
+import com.inmobiliaria.inmobiliaria.model.ContactForm;
 import com.inmobiliaria.inmobiliaria.model.LoginForm;
 import com.inmobiliaria.inmobiliaria.model.RegistrationForm;
+import com.inmobiliaria.inmobiliaria.model.StaffLoginForm; // <-- ¡NUEVA IMPORTACIÓN para el login de Staff!
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,10 @@ public class IndexController {
         return "index";
     }
 
-    // --- Métodos de LOGIN ---
+    // -------------------------------------------------------------------------
+    // --- MÉTODOS DE LOGIN DE USUARIO ---
+    // -------------------------------------------------------------------------
+
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("loginForm", new LoginForm());
@@ -30,7 +34,10 @@ public class IndexController {
         return "redirect:/dashboard";
     }
 
-    // --- Métodos de REGISTRO ---
+    // -------------------------------------------------------------------------
+    // --- MÉTODOS DE REGISTRO ---
+    // -------------------------------------------------------------------------
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("registrationForm", new RegistrationForm());
@@ -43,27 +50,47 @@ public class IndexController {
         return "redirect:/login";
     }
 
-    // --- Métodos de CONTACTO (NUEVOS) ---
+    // -------------------------------------------------------------------------
+    // --- MÉTODOS DE CONTACTO ---
+    // -------------------------------------------------------------------------
 
-    // Muestra el formulario de contacto (th:action en el HTML apunta a
-    // /contactar-agente)
     @GetMapping("/contactar-agente")
     public String showContactForm(Model model) {
         model.addAttribute("contactForm", new ContactForm());
         return "contact"; // Retorna el nombre de la plantilla contact.html
     }
 
-    // Procesa el envío del formulario de contacto
     @PostMapping("/contactar-agente")
     public String processContactForm(@ModelAttribute("contactForm") ContactForm contactForm) {
-
-        // **Lógica del Contacto:** Aquí es donde enviarías el email o guardarías la
-        // consulta.
-        // Ejemplo de log para ver los datos:
+        // Lógica para enviar el email o guardar la consulta
         System.out.println("Consulta recibida de: " + contactForm.getName());
         System.out.println("Mensaje: " + contactForm.getMessage());
 
         // Redirige a la página principal o a una página de confirmación
         return "redirect:/";
+    }
+
+    // -------------------------------------------------------------------------
+    // --- MÉTODOS DE LOGIN DE PERSONAL (STAFF) ---
+    // -------------------------------------------------------------------------
+
+    /**
+     * Muestra el formulario de inicio de sesión de personal.
+     */
+    @GetMapping("/staff/login")
+    public String showStaffLoginForm(Model model) {
+        model.addAttribute("staffLoginForm", new StaffLoginForm()); // Objeto para el formulario de staff
+        return "staff_login"; // Retorna el archivo staff_login.html
+    }
+
+    /**
+     * Procesa el formulario de inicio de sesión de personal.
+     */
+    @PostMapping("/staff/login")
+    public String processStaffLogin(@ModelAttribute("staffLoginForm") StaffLoginForm staffLoginForm) {
+        // Lógica de autenticación de personal
+
+        // Redirige al dashboard de personal si la autenticación es exitosa
+        return "redirect:/staff/dashboard";
     }
 }
