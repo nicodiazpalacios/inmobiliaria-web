@@ -17,6 +17,7 @@ public class SecurityConfig {
                                                                 "/", "/login", "/register", "/contactar-agente",
                                                                 "/staff/login",
                                                                 "/search", "/propiedad/**",
+                                                                "/staff/dashboard",
                                                                 "/css/**", "/js/**", "/images/**")
                                                 .permitAll()
 
