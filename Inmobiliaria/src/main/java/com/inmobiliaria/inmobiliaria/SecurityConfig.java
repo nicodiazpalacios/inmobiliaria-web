@@ -12,19 +12,17 @@ public class SecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests((requests) -> requests
-                                                // RUTAS PÚBLICAS: Todas las URLs de formularios y recursos estáticos
+                                                // Aseguramos que la nueva ruta /staff/admin-dashboard esté protegida
                                                 .requestMatchers(
-                                                                // Rutas de formularios
                                                                 "/", "/login", "/register", "/contactar-agente",
-                                                                "/staff/login", "/search", "/propiedad/**", // /propiedad/**
-                                                                                                            // para ver
-                                                                                                            // detalles
-                                                                                                            // por ID
-                                                                // Recursos estáticos
+                                                                "/staff/login",
+                                                                "/search", "/propiedad/**",
                                                                 "/css/**", "/js/**", "/images/**")
                                                 .permitAll()
 
-                                                // Cualquier otra solicitud requiere autenticación
+                                                // Cualquier otra solicitud (incluyendo /staff/dashboard y
+                                                // /staff/admin-dashboard)
+                                                // requiere autenticación
                                                 .anyRequest().authenticated())
 
                                 // Configuración de la autenticación de formularios

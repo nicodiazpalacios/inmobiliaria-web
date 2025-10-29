@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Panel de Control - Maestro</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .text-base {font-family: "Work Sans", "Noto Sans", sans-serif;}
+      .layout-container { flex-direction: row; }
+      /* Estilos para estado de los botones */
+      .status-active { background-color: #1193d4; color: white; }
+      .status-paused { background-color: #f0f3f4; color: #111618; }
+    </style>
+  </head>
+  
+  <body class="bg-white">
+
+    <div th:replace="header :: header"></div>
+
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          
+          <div th:replace="sidebar :: sidebar-menu"></div> 
+
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3">
+                <p class="text-[#111618] tracking-light text-[32px] font-bold leading-tight">Panel de control</p>
+                <p class="text-[#617c89] text-sm font-normal leading-normal" 
+                   th:text="|Bienvenida de nuevo, ${currentUser.name}|">Bienvenida de nuevo, Olivia Bennett</p>
+              </div>
+              <a
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#f0f3f4] text-[#111618] text-sm font-medium leading-normal"
+                th:href="@{/staff/add-employee}"
+              >
+                <span class="truncate">Agregar Empleado</span>
+              </a>
+            </div>
+
+            <div class="flex flex-wrap gap-4 p-4">
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#f0f3f4]">
+                <p class="text-[#111618] text-base font-medium leading-normal">Listados activos</p>
+                <p class="text-[#111618] tracking-light text-2xl font-bold leading-tight" 
+                   th:text="${metrics.activeListings}">0</p>
+              </div>
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#f0f3f4]">
+                <p class="text-[#111618] text-base font-medium leading-normal">Contratos activos</p>
+                <p class="text-[#111618] tracking-light text-2xl font-bold leading-tight" 
+                   th:text="${metrics.activeContracts}">0</p>
+              </div>
+              <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#f0f3f4]">
+                <p class="text-[#111618] text-base font-medium leading-normal">Pagos pendientes</p>
+                <p class="text-[#111618] tracking-light text-2xl font-bold leading-tight" 
+                   th:text="${metrics.pendingPayments}">0</p>
+              </div>
+            </div>
+            
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Actividad reciente</h2>
+            <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+              <th:block th:each="activity, stat : ${recentActivity}">
+                <div class="flex flex-col items-center gap-1 pt-3" th:classappend="${!stat.last ? 'pb-0' : 'pb-3'}">
+                  <div class="text-[#111618]" th:text="${activity.icon}"></div> 
+                  <div th:if="${!stat.last}" class="w-[1.5px] bg-[#dbe2e6] h-2 grow"></div>
+                </div>
+                <div class="flex flex-1 flex-col py-3">
+                  <p class="text-[#111618] text-base font-medium leading-normal" th:text="${activity.description}">Nueva actividad...</p>
+                  <p class="text-[#617c89] text-base font-normal leading-normal" th:text="${activity.timeAgo}">Hace X tiempo</p>
+                </div>
+              </th:block>
+              <div th:if="${#lists.isEmpty(recentActivity)}" class="col-span-2 text-center py-4 text-[#617c89]">
+                  <p>No hay actividad reciente.</p>
+              </div>
+            </div>
+            
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Próximos vencimientos</h2>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#dbe2e6] bg-white">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-white">
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Dirección</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Tipo</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Vencimiento</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="due : ${upcomingDues}" class="border-t border-t-[#dbe2e6]">
+                      <td class="h-[72px] px-4 py-2 text-[#111618] text-sm font-normal leading-normal" th:text="${due.address}">Dirección</td>
+                      <td class="h-[72px] px-4 py-2 text-[#617c89] text-sm font-normal leading-normal" th:text="${due.type}">Tipo</td>
+                      <td class="h-[72px] px-4 py-2 text-[#617c89] text-sm font-normal leading-normal" 
+                          th:text="${#temporals.format(due.dueDate, 'dd MMMM yyyy')}">Fecha</td>
+                      <td class="h-[72px] px-4 py-2 text-[#617c89] text-sm font-normal leading-normal" 
+                          th:text="${#numbers.formatCurrency(due.amount)}">Monto</td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(upcomingDues)}">
+                        <td colspan="4" class="text-center py-4 text-[#617c89]">No hay vencimientos próximos.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Listados Activos</h2>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#dbe2e6] bg-white">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-white">
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Dirección</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Estado</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="listing : ${activeListings}" class="border-t border-t-[#dbe2e6]">
+                      <td class="h-[72px] px-4 py-2 text-[#111618] text-sm font-normal leading-normal" th:text="${listing.address}">Dirección</td>
+                      <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 text-sm font-medium leading-normal w-full"
+                          th:classappend="${listing.status == 'Activo' ? 'status-active' : 'status-paused'}"
+                        >
+                          <span class="truncate" th:text="${listing.status}">Estado</span>
+                        </button>
+                      </td>
+                      <td class="h-[72px] px-4 py-2 text-[#617c89] text-sm font-bold leading-normal tracking-[0.015em]">
+                        <a th:href="@{'/propiedad/' + ${listing.id}}">Ver</a> | 
+                        <a th:href="@{'/staff/listing/edit/' + ${listing.id}}">Editar</a> | 
+                        <span th:if="${listing.status == 'Activo'}">Pausar</span> 
+                        <span th:if="${listing.status == 'Pausado'}">Activar</span> |
+                        <a th:href="@{'/staff/listing/delete/' + ${listing.id}}">Eliminar</a>
+                      </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(activeListings)}">
+                        <td colspan="3" class="text-center py-4 text-[#617c89]">No hay listados activos.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Empleados</h2>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#dbe2e6] bg-white">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-white">
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Nombre</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Rol</th>
+                      <th class="px-4 py-3 text-left text-[#111618] text-sm font-medium leading-normal">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="employee : ${employees}" class="border-t border-t-[#dbe2e6]">
+                      <td class="h-[72px] px-4 py-2 text-[#111618] text-sm font-normal leading-normal" th:text="${employee.name}">Nombre</td>
+                      <td class="h-[72px] px-4 py-2 text-[#617c89] text-sm font-normal leading-normal" th:text="${employee.role}">Rol</td>
+                      <td class="h-[72px] px-4 py-2 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 text-sm font-medium leading-normal w-full"
+                          th:classappend="${employee.status == 'Activo' ? 'status-active' : 'status-inactive'}"
+                        >
+                          <span class="truncate" th:text="${employee.status}">Estado</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(employees)}">
+                        <td colspan="3" class="text-center py-4 text-[#617c89]">No hay empleados registrados.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="footer :: footer"></div>
+
+  </body>
+</html>
