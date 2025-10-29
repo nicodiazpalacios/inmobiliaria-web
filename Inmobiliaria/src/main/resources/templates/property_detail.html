@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title th:text="${propertyDetail.title}"></title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .text-base {font-family: "Work Sans", "Noto Sans", sans-serif;}
+    </style>
+  </head>
+  
+  <body class="bg-white">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            
+            <div class="@container">
+              <div class="@[480px]:px-4 @[480px]:py-3">
+                <div
+                  class="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-lg min-h-80"
+                  th:style="|background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%), url('${propertyDetail.mainImageUrl}');|"
+                >
+                  <div class="flex justify-center gap-2 p-5">
+                    <div th:each="i : ${#numbers.sequence(1, 5)}" class="size-1.5 rounded-full bg-white" 
+                         th:classappend="${i == 1 ? '' : 'opacity-50'}"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 p-4">
+              <a class="text-[#617c89] text-base font-medium leading-normal" th:href="@{/}">Inicio</a>
+              <span class="text-[#617c89] text-base font-medium leading-normal">/</span>
+              <a class="text-[#617c89] text-base font-medium leading-normal" th:href="@{/search(query=${propertyDetail.type})}" th:text="${propertyDetail.type}">Tipo de propiedad</a>
+              <span class="text-[#617c89] text-base font-medium leading-normal">/</span>
+              <span class="text-[#111618] text-base font-medium leading-normal" th:text="${propertyDetail.title}">Título de la Propiedad</span>
+            </div>
+            
+            <h2 class="text-[#111618] tracking-light text-[28px] font-bold leading-tight px-4 text-left pb-3 pt-5" 
+                th:text="${propertyDetail.title}">Título de la Propiedad</h2>
+            <p class="text-[#111618] text-base font-normal leading-normal pb-3 pt-1 px-4" 
+               th:text="${propertyDetail.description}">Descripción de la propiedad...</p>
+            
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Características</h2>
+            <div class="p-4 grid grid-cols-2">
+              
+              <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe2e6] py-4 pr-2">
+                <p class="text-[#617c89] text-sm font-normal leading-normal">Tamaño</p>
+                <p class="text-[#111618] text-sm font-normal leading-normal" 
+                   th:text="|${propertyDetail.squareFootage} pies cuadrados|">0 pies cuadrados</p>
+              </div>
+              <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe2e6] py-4 pl-2">
+                <p class="text-[#617c89] text-sm font-normal leading-normal">Dormitorios</p>
+                <p class="text-[#111618] text-sm font-normal leading-normal" th:text="${propertyDetail.bedrooms}">0</p>
+              </div>
+              <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe2e6] py-4 pr-2">
+                <p class="text-[#617c89] text-sm font-normal leading-normal">Baños</p>
+                <p class="text-[#111618] text-sm font-normal leading-normal" th:text="${propertyDetail.bathrooms}">0</p>
+              </div>
+              <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe2e6] py-4 pl-2">
+                <p class="text-[#617c89] text-sm font-normal leading-normal">Estacionamiento</p>
+                <p class="text-[#111618] text-sm font-normal leading-normal" 
+                   th:text="${propertyDetail.parkingSpaces} + ' lugar(es)'"
+                >0 lugar(es)</p>
+              </div>
+              
+            </div>
+
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Precio</h2>
+            <p class="text-[#111618] text-base font-normal leading-normal pb-3 pt-1 px-4" 
+               th:text="${#numbers.formatCurrency(propertyDetail.price)} + ' (por mes si es alquiler)'">$0.00</p>
+
+            <h2 class="text-[#111618] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Contacto</h2>
+            <p class="text-[#111618] text-base font-normal leading-normal pb-3 pt-1 px-4">Para programar una visita o para más información, por favor contacte a:</p>
+            <div class="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-14 w-fit"
+                th:style="|background-image: url('${propertyDetail.agentImageUrl}');|"
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-[#111618] text-base font-medium leading-normal line-clamp-1" th:text="${propertyDetail.agentName}">Nombre del Agente</p>
+                <p class="text-[#617c89] text-sm font-normal leading-normal line-clamp-2" th:text="${propertyDetail.agentTitle}">Título del Agente</p>
+              </div>
+            </div>
+            <div class="flex justify-stretch">
+              <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1193d4] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Llamar</span>
+                </button>
+                <a 
+                  th:href="@{/contactar-agente}" 
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f3f4] text-[#111618] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Enviar correo electrónico</span>
+                </a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

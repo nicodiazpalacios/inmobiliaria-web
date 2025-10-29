@@ -12,9 +12,16 @@ public class SecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests((requests) -> requests
-                                                // RUTAS PÚBLICAS: Añadimos /staff/login
-                                                .requestMatchers("/", "/login", "/register", "/contactar-agente",
-                                                                "/staff/login", "/css/**", "/js/**", "/images/**")
+                                                // RUTAS PÚBLICAS: Todas las URLs de formularios y recursos estáticos
+                                                .requestMatchers(
+                                                                // Rutas de formularios
+                                                                "/", "/login", "/register", "/contactar-agente",
+                                                                "/staff/login", "/search", "/propiedad/**", // /propiedad/**
+                                                                                                            // para ver
+                                                                                                            // detalles
+                                                                                                            // por ID
+                                                                // Recursos estáticos
+                                                                "/css/**", "/js/**", "/images/**")
                                                 .permitAll()
 
                                                 // Cualquier otra solicitud requiere autenticación
